@@ -12,5 +12,15 @@ namespace Rock_Paper_Scissors_Lizard_Spock
         {
             this.name = name;
         }
+
+        public override int MakeChoice()
+        {
+            do
+            {
+                base.MakeChoice();
+                return choice;
+            }
+            while (!input.Equals("ROCK") && !input.Equals("PAPER") && !input.Equals("SCISSORS") && !input.Equals("LIZARD") && !input.Equals("SPOCK"));
+        }
     }
 }

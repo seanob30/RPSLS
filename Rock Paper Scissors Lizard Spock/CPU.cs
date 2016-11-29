@@ -12,5 +12,13 @@ namespace Rock_Paper_Scissors_Lizard_Spock
         {
             this.name = "CPU";
         }
+
+        public override int MakeChoice()
+        {
+            Random cpuchoice = new Random();
+            choice = cpuchoice.Next(0, 5);
+            Console.Clear();
+            return choice;
+        }
     }
 }

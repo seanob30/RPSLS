@@ -9,11 +9,7 @@ namespace Rock_Paper_Scissors_Lizard_Spock
     class Game
     {
         int round;
-        string player;
         double result;
-        double firstChoice;
-        double secondChoice;
-        string[] weaponsArray = {"ROCK", "PAPER", "SCISSORS", "SPOCK", "LIZARD" };
         Player playerOne;
         Player playerTwo;
         public void RunGame()
@@ -22,12 +18,9 @@ namespace Rock_Paper_Scissors_Lizard_Spock
             while (keepRunning)
             {
                 Console.WindowWidth = 50;
-
-                this.playerOne = new Player();
-                this.playerTwo = new Player();
                 this.round = 1;
 
-                StartScreen();
+                DisplayStartScreen();
                 ChoosePlayers();
                 while (playerOne.score < 2 && playerTwo.score < 2)
                 {
@@ -43,7 +36,7 @@ namespace Rock_Paper_Scissors_Lizard_Spock
             }
             
         }
-        public void StartScreen()
+        public void DisplayStartScreen()
         {
             Console.WriteLine("    ***ROCK  PAPER  SCISSORS  LIZARD  SPOCK***");
             Console.WriteLine("           Press any key to continue...");
@@ -58,18 +51,24 @@ namespace Rock_Paper_Scissors_Lizard_Spock
             Console.Clear();
 
             Console.Write("CHOOSE 1 OR 2 PLAYERS: ");
-            player = Console.ReadLine().ToUpper();
+            string player = Console.ReadLine().ToUpper();
             Console.WriteLine();
 
             if (player == "1" || player == "1 PLAYERS")
             {
+                this.playerOne = new Player();
+                this.playerTwo = new CPU();
+
                 Console.Write("PLAYER NAME: ");
                 playerOne.name = Console.ReadLine();
-                playerTwo = new CPU();
                 Console.Clear();
             }
             else if (player == "2" || player == "2 PLAYERS")
             {
+
+                this.playerOne = new Player();
+                this.playerTwo = new Player();
+
                 Console.Write("PLAYER 1 NAME: ");
                 playerOne.name = Console.ReadLine();
                 Console.WriteLine();
@@ -88,55 +87,23 @@ namespace Rock_Paper_Scissors_Lizard_Spock
 
         public void PickWeapon()
         {
-                Console.Write("LOADING...");
-                TakeShortBreak();
-                Console.Clear();
+            Console.Write("LOADING...");
+            TakeShortBreak();
+            Console.Clear();
 
-                Console.WriteLine("ROUND " + round++);
-                TakeThreeSecondBreak();
-                Console.Clear();
-            if (player == "1" || player == "1 PLAYER")
-            {
-                do
-                {
-                    Console.Write(playerOne.name + "'S CHOICE: ");
-                    playerOne.input = Console.ReadLine().ToUpper();
-                    firstChoice = Array.IndexOf(weaponsArray, playerOne.input);
-                    Console.Clear();
-                }
-                while (!playerOne.input.Equals("ROCK") && !playerOne.input.Equals("PAPER") && !playerOne.input.Equals("SCISSORS") && !playerOne.input.Equals("LIZARD") && !playerOne.input.Equals("SPOCK"));
+            Console.WriteLine("ROUND " + round++);
+            TakeThreeSecondBreak();
+            Console.Clear();
 
-                    Console.WriteLine(playerTwo.name + "'S CHOICE: " + secondChoice);
-                    Random cpuchoice = new Random();
-                    secondChoice = cpuchoice.Next(0, 5);
-                    Console.Clear();
-            }
-
-            else if (player == "2" || player == "2 PLAYERS")
-            {
-                do
-                {
-                    Console.Write(playerOne.name + "'S CHOICE: ");
-                    playerOne.input = Console.ReadLine().ToUpper();
-                    firstChoice = Array.IndexOf(weaponsArray, playerOne.input);
-                    Console.Clear();
-                }
-                while (!playerOne.input.Equals("ROCK") && !playerOne.input.Equals("PAPER") && !playerOne.input.Equals("SCISSORS") && !playerOne.input.Equals("LIZARD") && !playerOne.input.Equals("SPOCK"));
-
-                do
-                {
-                    Console.Write(playerTwo.name + "'S CHOICE: ");
-                    playerTwo.input = Console.ReadLine().ToUpper();
-                    secondChoice = Array.IndexOf(weaponsArray, playerTwo.input);
-                    Console.Clear();
-                }
-                while (!playerTwo.input.Equals("ROCK") && !playerTwo.input.Equals("PAPER") && !playerTwo.input.Equals("SCISSORS") && !playerTwo.input.Equals("LIZARD") && !playerTwo.input.Equals("SPOCK"));
-            }
+            playerOne.MakeChoice();
+            playerTwo.MakeChoice();
         }
+
+          
 
         public void DecideWinner()
         { 
-                result = (5 + firstChoice - secondChoice) % 5;
+                result = (5 + playerOne.choice - playerTwo.choice) % 5;
 
                 if(result == 1 || result == 3)
                 {

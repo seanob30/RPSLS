@@ -16,10 +16,6 @@ namespace Rock_Paper_Scissors_Lizard_Spock
 
         public virtual int MakeChoice()
         {
-            Console.Write(name + "'S CHOICE: ");
-            input = Console.ReadLine().ToUpper();
-            choice = Array.IndexOf(weaponsArray, input);
-            Console.Clear();
             return choice;
         }
     }

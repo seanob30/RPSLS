@@ -8,16 +8,15 @@ namespace Rock_Paper_Scissors_Lizard_Spock
 {
     class Human : Player
     {
-        public Human(string name)
-        {
-            this.name = name;
-        }
 
         public override int MakeChoice()
         {
             do
             {
-                base.MakeChoice();
+                Console.Write(name + "'S CHOICE: ");
+                input = Console.ReadLine().ToUpper();
+                choice = Array.IndexOf(weaponsArray, input);
+                Console.Clear();
                 return choice;
             }
             while (!input.Equals("ROCK") && !input.Equals("PAPER") && !input.Equals("SCISSORS") && !input.Equals("LIZARD") && !input.Equals("SPOCK"));

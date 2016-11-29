@@ -10,6 +10,7 @@ namespace Rock_Paper_Scissors_Lizard_Spock
     {
         int round;
         double result;
+        string player;
         Player playerOne;
         Player playerTwo;
         public void RunGame()
@@ -22,6 +23,7 @@ namespace Rock_Paper_Scissors_Lizard_Spock
 
                 DisplayStartScreen();
                 ChoosePlayers();
+                EnterPlayerNames();
                 while (playerOne.score < 2 && playerTwo.score < 2)
                 {
                     PickWeapon();
@@ -51,24 +53,39 @@ namespace Rock_Paper_Scissors_Lizard_Spock
             Console.Clear();
 
             Console.Write("CHOOSE 1 OR 2 PLAYERS: ");
-            string player = Console.ReadLine().ToUpper();
+            player = Console.ReadLine().ToUpper();
             Console.WriteLine();
 
             if (player == "1" || player == "1 PLAYERS")
             {
-                this.playerOne = new Player();
+                this.playerOne = new Human();
                 this.playerTwo = new CPU();
+            }
+            else if (player == "2" || player == "2 PLAYERS")
+            {
 
+                this.playerOne = new Human();
+                this.playerTwo = new Human();
+            }
+            else
+            {
+                Console.WriteLine("NOT A VALID INPUT.. TRY AGAIN");
+                TakeShortBreak();
+                Console.Clear();
+                ChoosePlayers();
+            }
+        }
+
+        private void EnterPlayerNames()
+        {
+            if (player == "1" || player == "1 PLAYERS")
+            {
                 Console.Write("PLAYER NAME: ");
                 playerOne.name = Console.ReadLine();
                 Console.Clear();
             }
             else if (player == "2" || player == "2 PLAYERS")
             {
-
-                this.playerOne = new Player();
-                this.playerTwo = new Player();
-
                 Console.Write("PLAYER 1 NAME: ");
                 playerOne.name = Console.ReadLine();
                 Console.WriteLine();
@@ -81,7 +98,7 @@ namespace Rock_Paper_Scissors_Lizard_Spock
                 Console.WriteLine("NOT A VALID INPUT.. TRY AGAIN");
                 TakeShortBreak();
                 Console.Clear();
-                ChoosePlayers();
+                EnterPlayerNames();
             }
         }
 
@@ -107,15 +124,15 @@ namespace Rock_Paper_Scissors_Lizard_Spock
 
                 if(result % 2 == 0)
                 {
-                    Console.WriteLine(playerOne.name + " WINS!");
-                    playerOne.score++;
+                    Console.WriteLine(playerTwo.name + " WINS!");
+                    playerTwo.score++;
                     TakeThreeSecondBreak();
                     Console.Clear();
                 }
                 else if (result % 2 != 0)
                 {
-                    Console.WriteLine(playerTwo.name + " WINS!");
-                    playerTwo.score++;
+                    Console.WriteLine(playerOne.name + " WINS!");
+                    playerOne.score++;
                     TakeThreeSecondBreak();
                     Console.Clear();
                 }

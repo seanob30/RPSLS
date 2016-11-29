@@ -36,7 +36,7 @@ namespace Rock_Paper_Scissors_Lizard_Spock
             }
             
         }
-        public void DisplayStartScreen()
+        private void DisplayStartScreen()
         {
             Console.WriteLine("    ***ROCK  PAPER  SCISSORS  LIZARD  SPOCK***");
             Console.WriteLine("           Press any key to continue...");
@@ -44,7 +44,7 @@ namespace Rock_Paper_Scissors_Lizard_Spock
             Console.Clear();
         }
 
-        public void ChoosePlayers()
+        private void ChoosePlayers()
         {
             Console.Write("LOADING..");
             TakeShortBreak();
@@ -85,7 +85,7 @@ namespace Rock_Paper_Scissors_Lizard_Spock
             }
         }
 
-        public void PickWeapon()
+        private void PickWeapon()
         {
             Console.Write("LOADING...");
             TakeShortBreak();
@@ -101,18 +101,18 @@ namespace Rock_Paper_Scissors_Lizard_Spock
 
           
 
-        public void DecideWinner()
+         private void DecideWinner()
         { 
                 result = (5 + playerOne.choice - playerTwo.choice) % 5;
 
-                if(result == 1 || result == 3)
+                if(result % 2 == 0)
                 {
                     Console.WriteLine(playerOne.name + " WINS!");
                     playerOne.score++;
                     TakeThreeSecondBreak();
                     Console.Clear();
                 }
-                else if (result == 2 || result == 4)
+                else if (result % 2 != 0)
                 {
                     Console.WriteLine(playerTwo.name + " WINS!");
                     playerTwo.score++;
@@ -127,7 +127,7 @@ namespace Rock_Paper_Scissors_Lizard_Spock
                 }
             }
 
-        public void CrownChampion()
+        private void CrownChampion()
         {
             if (playerOne.score == 2)
             {
@@ -156,17 +156,17 @@ namespace Rock_Paper_Scissors_Lizard_Spock
 
         }
 
-        public void TakeThreeSecondBreak()
+        private void TakeThreeSecondBreak()
         {
             System.Threading.Thread.Sleep(3000);
         }
 
-        public void TakeTenSecondBreak()
+        private void TakeTenSecondBreak()
         {
             System.Threading.Thread.Sleep(10000);
         }
 
-        public void TakeShortBreak()
+        private void TakeShortBreak()
         {
             System.Threading.Thread.Sleep(1000);
         }
